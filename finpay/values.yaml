@@ -1,0 +1,133 @@
+# ──────────────────────────────────────────────
+# finpay-helm-stack — values.yaml
+# Default values (dev environment)
+# Override with: -f environments/staging.yaml
+# ──────────────────────────────────────────────
+
+global:
+  environment: dev
+  imageRegistry: ""
+  imagePullSecrets: []
+
+# ── API Gateway ────────────────────────────────
+apiGateway:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: nginx
+    tag: "1.25"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 15
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+# ── Transaction Processor ──────────────────────
+txnProcessor:
+  enabled: true
+  replicaCount: 3
+  image:
+    repository: nginx
+    tag: "1.25"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8081
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 20
+    targetCPUUtilizationPercentage: 65
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8081
+    initialDelaySeconds: 10
+    periodSeconds: 15
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8081
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+# ── Fraud Checker ──────────────────────────────
+fraudChecker:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: nginx
+    tag: "1.25"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8082
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 750m
+      memory: 512Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 70
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8082
+    initialDelaySeconds: 10
+    periodSeconds: 15
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8082
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+# ── Observability ──────────────────────────────
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 15s
+    path: /metrics
+
+# ── Ingress ────────────────────────────────────
+ingress:
+  enabled: false
+  className: nginx
+  host: finpay.local
+  tls: false

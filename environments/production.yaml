@@ -1,0 +1,40 @@
+global:
+  environment: production
+
+apiGateway:
+  replicaCount: 5
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 1Gi
+  autoscaling:
+    maxReplicas: 50
+
+txnProcessor:
+  replicaCount: 10
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 1Gi
+  autoscaling:
+    minReplicas: 10
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 60
+
+fraudChecker:
+  replicaCount: 5
+  resources:
+    requests:
+      cpu: 400m
+      memory: 512Mi
+    limits:
+      cpu: 1500m
+      memory: 1Gi
+  autoscaling:
+    maxReplicas: 20

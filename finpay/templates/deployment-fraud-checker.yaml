@@ -1,0 +1,41 @@
+{{- if .Values.fraudChecker.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-fraud-checker
+  labels:
+    app: fraud-checker
+    release: {{ .Release.Name }}
+    environment: {{ .Values.global.environment }}
+    component: risk
+spec:
+  replicas: {{ .Values.fraudChecker.replicaCount }}
+  selector:
+    matchLabels:
+      app: fraud-checker
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: fraud-checker
+        release: {{ .Release.Name }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.fraudChecker.service.port }}"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: fraud-checker
+          image: "{{ .Values.fraudChecker.image.repository }}:{{ .Values.fraudChecker.image.tag }}"
+          imagePullPolicy: {{ .Values.fraudChecker.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.fraudChecker.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.fraudChecker.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.fraudChecker.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.fraudChecker.resources | nindent 12 }}
+{{- end }}

@@ -1,0 +1,20 @@
+global:
+  environment: staging
+
+apiGateway:
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 750m
+      memory: 512Mi
+
+txnProcessor:
+  replicaCount: 5
+  autoscaling:
+    maxReplicas: 30
+
+fraudChecker:
+  replicaCount: 3

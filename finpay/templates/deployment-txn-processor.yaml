@@ -1,0 +1,41 @@
+{{- if .Values.txnProcessor.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-txn-processor
+  labels:
+    app: txn-processor
+    release: {{ .Release.Name }}
+    environment: {{ .Values.global.environment }}
+    component: processing
+spec:
+  replicas: {{ .Values.txnProcessor.replicaCount }}
+  selector:
+    matchLabels:
+      app: txn-processor
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: txn-processor
+        release: {{ .Release.Name }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.txnProcessor.service.port }}"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: txn-processor
+          image: "{{ .Values.txnProcessor.image.repository }}:{{ .Values.txnProcessor.image.tag }}"
+          imagePullPolicy: {{ .Values.txnProcessor.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.txnProcessor.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.txnProcessor.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.txnProcessor.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.txnProcessor.resources | nindent 12 }}
+{{- end }}

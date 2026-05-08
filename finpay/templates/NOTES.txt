@@ -1,0 +1,24 @@
+╔══════════════════════════════════════════════════════╗
+║           finpay-helm-stack deployed                 ║
+╚══════════════════════════════════════════════════════╝
+
+Environment: {{ .Values.global.environment }}
+
+Services deployed:
+{{- if .Values.apiGateway.enabled }}
+  ✓ api-gateway      → port {{ .Values.apiGateway.service.port }}
+{{- end }}
+{{- if .Values.txnProcessor.enabled }}
+  ✓ txn-processor    → port {{ .Values.txnProcessor.service.port }}
+{{- end }}
+{{- if .Values.fraudChecker.enabled }}
+  ✓ fraud-checker    → port {{ .Values.fraudChecker.service.port }}
+{{- end }}
+
+To verify your deployment:
+  kubectl get pods -l release={{ .Release.Name }}
+  kubectl get svc -l release={{ .Release.Name }}
+  kubectl get hpa -l release={{ .Release.Name }}
+
+To upgrade:
+  helm upgrade {{ .Release.Name }} ./finpay -f environments/{{ .Values.global.environment }}.yaml

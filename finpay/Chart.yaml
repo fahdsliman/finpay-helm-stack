@@ -1,0 +1,17 @@
+apiVersion: v2
+name: finpay
+description: >
+  A Helm chart for deploying a production-style payment microservice stack —
+  API gateway, transaction processor, and fraud checker — with Prometheus
+  observability and multi-environment support.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - fintech
+  - payments
+  - sre
+  - observability
+maintainers:
+  - name: Fahd Sliman
+    email: fahdsliman@proton.me

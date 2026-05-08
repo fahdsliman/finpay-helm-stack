@@ -1,0 +1,23 @@
+{{- if .Values.fraudChecker.autoscaling.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-fraud-checker
+  labels:
+    app: fraud-checker
+    release: {{ .Release.Name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Release.Name }}-fraud-checker
+  minReplicas: {{ .Values.fraudChecker.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.fraudChecker.autoscaling.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.fraudChecker.autoscaling.targetCPUUtilizationPercentage }}
+{{- end }}
