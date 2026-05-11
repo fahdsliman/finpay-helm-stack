@@ -37,4 +37,4 @@ fraudChecker:
       cpu: 1500m
       memory: 1Gi
   autoscaling:
-    maxReplicas: 20
+    maxReplicas: 20 
