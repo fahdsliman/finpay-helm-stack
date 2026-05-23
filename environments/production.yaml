@@ -25,7 +25,7 @@ txnProcessor:
   autoscaling:
     minReplicas: 10
     maxReplicas: 100
-    targetCPUUtilizationPercentage: 60
+    targetCPUUtilizationPercentage: 60   
 
 fraudChecker:
   replicaCount: 5
