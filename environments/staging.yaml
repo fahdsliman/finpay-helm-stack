@@ -16,5 +16,5 @@ txnProcessor:
   autoscaling:
     maxReplicas: 30
 
-fraudChecker:
+fraudChecker: 
   replicaCount: 3 
