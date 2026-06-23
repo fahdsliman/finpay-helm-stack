@@ -17,4 +17,4 @@ txnProcessor:
     maxReplicas: 30
 
 fraudChecker:
-  replicaCount: 3
+  replicaCount: 3 
