@@ -38,4 +38,3 @@ fraudChecker:
       memory: 1Gi
   autoscaling:
     maxReplicas: 20
-
