@@ -1,3 +1,6 @@
+​```
+finpay-helm-stack
+
 # finpay-helm-stack
 
 A production-style Helm chart for deploying a three-service payment microservice
@@ -116,3 +119,5 @@ A `ServiceMonitor` resource is included for Prometheus Operator scraping at a
 Designed to reflect payment infrastructure reliability patterns from
 high-stakes financial environments.
 
+...
+​```
