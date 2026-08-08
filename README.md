@@ -10,6 +10,7 @@ financial infrastructure.
 
 ## Architecture
 ```
+```
 ┌─────────────────────────────────────────────────┐
 │                finpay-helm-stack                 │
 │                                                  │
@@ -23,10 +24,10 @@ financial infrastructure.
 │                       │   port 8082     │        │
 │                       └─────────────────┘        │
 └─────────────────────────────────────────────────┘
+```
 
 
 
----
 
 ## Services
 
