@@ -6,11 +6,9 @@ A production-style Helm chart for deploying a three-service payment microservice
 stack on Kubernetes. Built to reflect real-world SRE practices in high-stakes
 financial infrastructure.
 
----
-
+```
+```
 ## Architecture
-```
-```
 ┌─────────────────────────────────────────────────┐
 │                finpay-helm-stack                 │
 │                                                  │
@@ -68,8 +66,8 @@ helm template finpay-prod ./finpay -f environments/production.yaml
 helm install finpay-prod ./finpay -f environments/production.yaml
 ```
 
----
 
+```
 ## Project Structure
 
 finpay-helm-stack/
@@ -91,8 +89,8 @@ finpay-helm-stack/
 └── environments/
 ├── staging.yaml                       # Staging overrides
 └── production.yaml                    # Production overrides
+```
 
----
 
 ## Environment Overrides
 
