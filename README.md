@@ -1,4 +1,4 @@
-"""
+```
 
 # finpay-helm-stack
 
@@ -9,7 +9,7 @@ financial infrastructure.
 ---
 
 ## Architecture
-"""
+```
 ┌─────────────────────────────────────────────────┐
 │                finpay-helm-stack                 │
 │                                                  │
