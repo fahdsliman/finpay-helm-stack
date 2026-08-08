@@ -1,5 +1,4 @@
 ```
-
 ## finpay-helm-stack
 
 A production-style Helm chart for deploying a three-service payment microservice
