@@ -112,6 +112,5 @@ A `ServiceMonitor` resource is included for Prometheus Operator scraping at a
 
 ---
 
-**Author:** Fahd Sliman — Site Reliability Engineer 
-Designed to reflect payment infrastructure reliability patterns from
-high-stakes financial environments.
+Author:
+Fahd Sliman
