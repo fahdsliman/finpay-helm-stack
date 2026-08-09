@@ -5,8 +5,6 @@ A production-style Helm chart for deploying a three-service payment microservice
 stack on Kubernetes. Built to reflect real-world SRE practices in high-stakes
 financial infrastructure.
 
-```
-```
 ## Architecture
 ┌─────────────────────────────────────────────────┐
 │                finpay-helm-stack                │
